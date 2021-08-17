@@ -55,8 +55,7 @@ public class RemoteCamera {
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace(); 
-		}
-		
+		}	
 	}
 	
 	/**Returns the AWS rekognition Image **/
