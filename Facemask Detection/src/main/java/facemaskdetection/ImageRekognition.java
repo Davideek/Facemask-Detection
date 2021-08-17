@@ -10,7 +10,6 @@ public class ImageRekognition {
 	private RemoteCamera remoteCamera;
 	private FileHandler fileHandler;
 	private ImageManager imageManager;
-	private LabelManager labelManager;
 	
 	public ImageRekognition(RemoteCamera remoteCamera) {
 		 this.rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion(region).build();
