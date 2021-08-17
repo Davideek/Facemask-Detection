@@ -36,15 +36,19 @@ public class ImageRekognition {
 		fileHandler.createResultFile(path, name, input );		
 	}
 	
+	/**Creates a ProtectionManager for the image**/
+	public void createProtectionManager() {
+		imageManager.createProtectionManager();
+	}
+	
 	/**Prints the PPE found in the snapshot image**/
 	public void printProtectionEquipment() {
-		this.imageManager.getProtectionManager().printProtection();
+		imageManager.getProtectionManager().printProtection();
 	}
 	
 	/**Prints if the required PPE is missing **/	
 	public void printMissingProtectionEquipment() {
-		boolean protection = this.imageManager.getProtectionManager().isProtected();
-		if(protection){
+		if(this.imageManager.getProtectionManager().isProtected()){
 			System.out.println("No protection missing");
 		}
 		else {
