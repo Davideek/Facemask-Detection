@@ -11,21 +11,15 @@ public class ImageManager {
 	private static float confidence = 80f;
 	private AmazonRekognition rekognitionClient;
 	private Image image;
+	private ProtectionManager protectionManager;
 	
 	public ImageManager(AmazonRekognition rekognitionClient,  Image img){
 		this.image = img;
 		this.rekognitionClient = rekognitionClient;
 	}
 	
-	/**Returns a LabelManager for the image **/
-	public LabelManager getLabelManager(){
-		DetectLabelsRequest request = new DetectLabelsRequest().withImage(image).withMinConfidence(75F).withMaxLabels(10);
-		DetectLabelsResult result = rekognitionClient.detectLabels(request);
-		return new LabelManager(result.getLabels());
-	}
-	
-	/**Returns a ProtectionManager for the image **/
-	public ProtectionManager getProtectionManager() {
+	/**Creates a ProtectionManager for the image **/
+	public void createProtectionManager() {
         ProtectiveEquipmentSummarizationAttributes summaryAttributes = new ProtectiveEquipmentSummarizationAttributes()
                 .withMinConfidence(confidence)
                 .withRequiredEquipmentTypes("FACE_COVER");
@@ -33,14 +27,12 @@ public class ImageManager {
                 .withImage(image)
                 .withSummarizationAttributes(summaryAttributes);
         DetectProtectiveEquipmentResult result = rekognitionClient.detectProtectiveEquipment(request);
-        return new ProtectionManager(result);       
+        this.protectionManager = new ProtectionManager(result);       
 	}
 	
-	/**Returns a TextManager for the image **/
-	public TextManager getDetectedTexts(){
-		DetectTextRequest request = new DetectTextRequest().withImage(image);
-		DetectTextResult result = rekognitionClient.detectText(request);
-		return new TextManager(result.getTextDetections());		
+	/**Returns a ProtectionManager for the image **/
+	public ProtectionManager getProtectionManager() {
+		return protectionManager;
 	}
 		
 	
