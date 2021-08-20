@@ -11,7 +11,6 @@ public class ProtectionManager {
 	
 	DetectProtectiveEquipmentResult DPE;
 	List <ProtectiveEquipmentPerson> persons;
-	List <Integer> persons2;
 
 	public ProtectionManager(DetectProtectiveEquipmentResult DPE) {
 		this.DPE = DPE;
